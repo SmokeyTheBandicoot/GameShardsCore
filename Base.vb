@@ -65,6 +65,17 @@ Namespace Base
 
     Namespace math
         Public Class MiscMath
+
+            Function Euclide_MCD(ByVal a As Int16, ByVal b As Int16) As Int16
+                    Dim r As Int16 = a Mod b
+                    While (r <> 0)
+                        a = b
+                        b = r
+                        r = a Mod b
+                    End While
+                Return b
+            End Function
+
             Public Function GenRandomInt(inMin As Int32, inMax As Int32) As Int32
                 Static staticRandomGenerator As New Random
                 If inMin > inMax Then Dim t = inMin : inMin = inMax : inMax = t
