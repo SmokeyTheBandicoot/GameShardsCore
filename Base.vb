@@ -4,21 +4,14 @@ Imports System.Random
 Imports System.Math
 
 Namespace Base
-    Public Class ReservedChars
-        'Dim vect As Vector2D
-        Public ReadOnly ReservedChars() As String = {":", "/", "\", "*", "?", """", "<", ">", "|"}
+    Public Class ColorManager
+        Public Function GetComplementaryColor(ByVal color As Color, Optional ByVal ConsiderTransparency As Boolean = False) As Color
+            If ConsiderTransparency Then
+                Return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B, 255 - color.A)
+            End If
+            Return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B)
+        End Function
     End Class
-
-    Namespace ColorManager
-        Public Class ColorManager
-            Public Function GetComplementaryColor(ByVal color As Color, Optional ByVal ConsiderTransparency As Boolean = False) As Color
-                If ConsiderTransparency Then
-                    Return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B, 255 - color.A)
-                End If
-                Return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B)
-            End Function
-        End Class
-    End Namespace
 
     Namespace Geometry
         Public Class Geometry
@@ -63,7 +56,7 @@ Namespace Base
         End Class
     End Namespace
 
-    Namespace math
+    Namespace Math
         Public Class MiscMath
             Public Function GenRandomInt(inMin As Int32, inMax As Int32) As Int32
                 Static staticRandomGenerator As New Random
@@ -508,6 +501,7 @@ Namespace Base
         End Class
     End Namespace
 
+
     Namespace Strings
         Public Class StringManager
             Public Function ReplaceCharsets(ByVal str As String, ByVal chars1 As Charset, ByVal chars2 As Charset) As String
@@ -524,6 +518,3 @@ Namespace Base
         End Class
     End Namespace
 End Namespace
-'Private Sub MsgBox(p1 As Object)
-'        Throw New NotImplementedException
-'    End Sub

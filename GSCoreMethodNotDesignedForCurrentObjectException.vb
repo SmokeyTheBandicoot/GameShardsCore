@@ -1,8 +1,8 @@
-﻿Public Class GSCoreIncompatibleArgumentsException
+﻿Public Class GSCoreMethodNotDesignedForCurrentObjectException
     Inherits Exception
 
     Public Sub New()
-        MyBase.New("[GameShardsCore Exception]: The arguments passed by the method are incompatible with eachother.")
+        MyBase.New("[GameShardsCore Exception]: The called procedure or function is inherited from a class or implemented from an interface for another class, and has no function in the current class (object)")
     End Sub
 
     Public Sub New(message As String)

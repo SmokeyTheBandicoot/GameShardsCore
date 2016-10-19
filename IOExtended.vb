@@ -1,7 +1,7 @@
 ﻿Imports GameShardsCore
 
 Public Class IOExtended
-    Dim GBase As New GameShardsCore.Base.ReservedChars
+    Dim GBase As New GameShardsCore.Charset
     ''' <summary>
     ''' Renames a file (for example: Rename("C:\\GameShardsSoftware\dummy.pdf", "test.pdf"), will rename the file "dummy.pdf" in "C:\\GameShardsSoftware" to "test.pdf")
     ''' </summary>

@@ -98,6 +98,7 @@
     <Compile Include="ExtendedControls.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GSCoreMethodNotDesignedForCurrentObjectException.vb" />
     <Compile Include="IncompatibleArgumentsException.vb" />
     <Compile Include="IOExtended.vb" />
     <Compile Include="MathVector2D.vb" />

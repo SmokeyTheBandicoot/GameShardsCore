@@ -1,5 +1,5 @@
 ﻿Imports System.Math
-Public Module Constants
+Namespace Constants
     Public Class Geometry
         Public Const Rad2Deg As Double = 180.0 / Math.PI
         Public Const Deg2Rad As Double = Math.PI / 180.0
@@ -58,4 +58,4 @@ Public Module Constants
         Public Const ElementaryChargesInACoulomb As Double = 6.25E+18
         Public Const SpeedOfSoundInAir As Double = 331
     End Class
-End Module
+End Namespace

@@ -1,4 +1,7 @@
 ﻿Public Class Charset
+
+    Public ReadOnly ReservedChars() As String = {":", "/", "\", "*", "?", """", "<", ">", "|"}
+
     Private _Chars As List(Of Char)
     Public Property Chars() As List(Of Char)
         Get
