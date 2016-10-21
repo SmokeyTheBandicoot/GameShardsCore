@@ -1,11 +1,23 @@
 Imports GameShardsCore
-Imports System.Math
+Imports System.Text
+Imports System.Text.Encoding
 
 Module SpeEx
   Public Class SpeExSearchFilter
   
     Private Results(1,) as String
     Private PartialReq As New List(Of String)
+    
+    Public Shared Readonly Property CharSet As List(Of Char)
+      Get
+        Dim List As New List(Of Char)
+        For x = 0 to 255
+          List.Add(Encoding.UTF8.GetString(x))
+        Next
+        Return List
+      End Get
+    End Property
+          
   
     Public Shared Function SpeExSearc(ByVal List As List(Of String), ByVal Request As String) As String(,)
       
@@ -26,12 +38,20 @@ Module SpeEx
       '§: Must exclude the Char that follows it
       '(Val1-Val2): Excludes a sequence of Chars ("(a-g)" excludes characters from "a" to "g". a-z: letters, 0-9: numbers)
       
+      'Operands Rules:
+      'Not > And > Or
+      
       ReDim Results(1, List.Count - 1)
       
+      'Divides The String With The AND
+      If String.Contains(Request, "&") Then
+        PartialReq = Split
+      
+      'Divides The String With The OR
       If String.Contains(Request, "|") Then
         PartialReq = Split(Request, "|")
       End If
-      
+     
       For x = 0 to PartialReq.Count - 1
         Dim l As String(1,) = SpeExSearch(List, PartialReq(x))
         Dim count As Integer = l.GetLength(1)
@@ -39,4 +59,4 @@ Module SpeEx
           Results(0, Results.Count) = (SpeExSearch(List, PartialReq(x))(0))
           Results(1, Results.Count) = (SpeExSearch(List, PartialReq(x))(1))
         Next
-     Next
+      Next
