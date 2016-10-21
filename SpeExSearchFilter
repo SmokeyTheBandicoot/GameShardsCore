@@ -1,0 +1,37 @@
+Imports GameShardsCore
+Imports System.Math
+
+Module SpeEx
+  Public Class SpeExSearchFilter
+  
+    Private Results(1,) as String
+    Private PartialReq As New List(Of String)
+  
+    Public Shared Function SpeExSearc(ByVal List As List(Of String), ByVal Request As String) As String(,)
+      
+      'Results:
+      'Results(0, X) --> Included
+      'Results(1, X) --> Excluded
+      
+      'Rules:
+      '*: Any Character. ASCII Supported (8-bit)
+      '?: Any Number Of Chars. ASCII Suppoerted (8-bit)
+      '|: OR operator
+      '!: NOT Operator
+      '&: AND Operator
+      '%: To insert a reserved char into the string
+      '#: Must Contain Numbers
+      '@: Must Contain Letters
+      '$: Must Contain Symbols
+      '§: Must exclude the Char that follows it
+      
+      ReDim Results(1, List.Count - 1)
+      
+      If String.Contains(Request, "|") Then
+        PartialReq = Split(Request, "|")
+      End If
+      
+      For x = 0 to PartialReq.Count - 1
+        For y = 0 to SpeExSearch(List, PartialReq(x),
+        SpeExSearch
+      
