@@ -24,6 +24,7 @@ Module SpeEx
       '@: Must Contain Letters
       '$: Must Contain Symbols
       '§: Must exclude the Char that follows it
+      '(Val1-Val2): Excludes a sequence of Chars ("(a-g)" excludes characters from "a" to "g". a-z: letters, 0-9: numbers)
       
       ReDim Results(1, List.Count - 1)
       
@@ -32,6 +33,10 @@ Module SpeEx
       End If
       
       For x = 0 to PartialReq.Count - 1
-        For y = 0 to SpeExSearch(List, PartialReq(x),
-        SpeExSearch
-      
+        Dim l As String(1,) = SpeExSearch(List, PartialReq(x))
+        Dim count As Integer = l.GetLength(1)
+        For y = 0 to l.Count - 1
+          Results(0, Results.Count) = (SpeExSearch(List, PartialReq(x))(0))
+          Results(1, Results.Count) = (SpeExSearch(List, PartialReq(x))(1))
+        Next
+     Next
