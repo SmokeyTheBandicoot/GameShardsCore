@@ -66,24 +66,38 @@ Namespace Base
     Namespace math
 
         Public Shared Class Fibonacci
-            Public Shared Function FibonacciNNumber(Byval Val As Integer) As Integer
-                Dim n2,n1,n As Integer
-                For x = 0 to Val - 1
-                    n = n2 + n1
-                    n2 = n1
-                    n1 = n
-                Next
-                Return n
+            Public Shared Function FibonacciNNumber(Byval Val As UInteger) As Integer
+                If Val = 0 Then
+                    Throw New IncompatibleArgumentsException
+                ElseIf Val = 1 OrElse Val = 2 Then
+                    Return 1
+                Else
+                    Dim n2,n1,n As Integer
+                    n2 = 1
+                    n1 = 1
+                    For x = 0 to Val - 1
+                        n = n2 + n1
+                        n2 = n1
+                        n1 = n
+                    Next
+                    Return n
+                End If
             End Function
 
-            Public Shared Function FibonacciGoldenRatio(Byval Val As Integer) As Double
-                Dim n2,n1,n As Integer
-                For x = 0 to Val - 1
-                    n = n2 + n1
-                    n2 = n1
-                    n1 = n
-                Next
-            Return n/n1
+            Public Shared Function FibonacciGoldenRatio(Byval Val As UInteger) As Double
+                If Val <= 2 Then
+                    Return 1
+                Else
+                    Dim n2,n1,n As Integer
+                    n2 = 1
+                    n1 = 1
+                    For x = 0 to Val - 1
+                        n = n2 + n1
+                        n2 = n1
+                        n1 = n
+                    Next
+                    Return n/n1
+                End If
             End Function
         End Class
 
