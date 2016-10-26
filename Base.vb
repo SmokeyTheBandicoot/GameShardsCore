@@ -64,6 +64,30 @@ Namespace Base
     End Namespace
 
     Namespace math
+
+        Public Shared Class Fibonacci
+            Public Shared Function FibonacciNNumber(Byval Val As Integer) As Integer
+                Dim n2,n1,n As Integer
+                For x = 0 to Val - 1
+                    n = n2 + n1
+                    n2 = n1
+                    n1 = n
+                Next
+                Return n
+            End Function
+
+            Public Shared Function FibonacciGoldenRatio(Byval Val As Integer) As Double
+                Dim n2,n1,n As Integer
+                For x = 0 to Val - 1
+                    n = n2 + n1
+                    n2 = n1
+                    n1 = n
+                Next
+            Return n/n1
+            End Function
+        End Class
+
+
         Public Class MiscMath
             Public Function GenRandomInt(inMin As Int32, inMax As Int32) As Int32
                 Static staticRandomGenerator As New Random
