@@ -1,0 +1,139 @@
+Option Strict On
+
+Imports System.Math
+Imports NCalc
+
+Namespace AdvancedMath
+Public Class SumProd
+  '''Sum (Summation, Sommatoria)
+  '''Use Like This:  
+  '''SimpleSummation("2 * [a] + 3 * [b] + [x]", 0, 2, {"a", "b"}.ToList, {2, 3}.ToList)
+  '''x is the main argument (ie: Sum that goes from 0 to 2)
+  '''This Will produce:
+  '''2 * 2 + 3 * 3 + 0 (For x = Start) + 2 * 2 + 3 * 3 + 1 (For x = 1) + 2 * 2 + 3 * 3 + 2 (For x = End) = 42
+  
+  Public Shared Function SimpleSummation(Byval Expr, Byval Start as Integer, Byval End As Integer, Byval ParamRef As List(Of String), Byval ParamVal As List(Of Double)) As Double
+    
+    'Initilization
+    
+    Dim Sum As Double 'automatically initialized to 0
+    Dim e As New Expression(Expr)
+    
+    'Parameter calculation
+      For y As Integer = ParamRef.Count - 1
+        e.Parameters(ParamRef(y)) = ParamVal(y)
+      Next
+    
+    'Sum Calculation
+    For x As Integer = Start to End
+      e.Parameters("[x]") = x
+      Sum += e.Evaluate()
+    Next
+    
+    Return Sum
+  End Function
+  
+  '''
+  '''Prod (Multiplication, Produttoria)
+  '''Use Like This: SimpleMultiplication("2 * [a] + 3 * [b] + [x]", 0, 2, New List(Of String) = {"a", "b"}.ToList, New List(Of Double) = {2, 3}.ToList)
+  '''x is the main argument (ie: Prod that goes from 0 to 2)
+  '''This Will produce:
+  '''(2 * 2 + 3 * 3 + 0) (For x = Start) * (2 * 2 + 3 * 3 + 1) (For x = 1) * (2 * 2 + 3 * 3 + 2) (For x = End) = 2730
+  Public Shared Function SimpleMultiplication(Byval Expr, Byval Start as Integer, Byval End As Integer, Byval ParamRef As List(Of String), Byval ParamVal As List(Of Double)) As Double
+    
+    'Initilization
+    
+    Dim Prod As Double 'automatically initialized to 0
+    Dim e As New Expression(Expr)
+    
+    'Parameter calculation
+    For y As Integer = ParamRef.Count - 1
+      e.Parameters(ParamRef(y)) = ParamVal(y)
+    Next
+    
+    'Prod Calculation
+    For x As Integer = Start to End2730
+      e.Parameters("[x]") = x
+      Prod *= e.Evaluate()
+    Next
+    
+    Return Prod
+  End Function
+
+'''Prod (Multiplication, Produttoria)
+  '''Use Like This: 
+'''NOTE: ParamVal MUST HAVE (N, Delta) DIMENSION, where N is number of parameters, Delta is ((Start - End) + 1) otherwise this will crash!!!! 
+'''Multiplication("2 * [a] + 3 * [b] + [x]", 0, 2, {"a", "b"}.ToList, Matrix)
+  '''x is the main argument (ie: Sum that goes from 0 to 2)
+  '''This Will produce:
+  '''(2 * 2 + 3 * 3 + 0) (For x = Start) * (2 * 2 + 3 * 3 + 1) (For x = 1) * (2 * 2 + 3 * 3 + 2) (For x = End) = 2730
+  
+Public Function Multiplication(Byval Expr, Byval Start as Integer, Byval End As Integer, Byval ParamRef As List(Of String), ParamArray ParamVal As Double(,)) As Double
+    
+    'Initilization
+    
+Dim Prod As Double 'automatically initialized to 0
+    Dim e As New Expression(Expr)
+    
+    'Parameter calculation
+
+    
+    'Sum Calculation
+    Try
+      For x As Integer = Start to End
+        For y As Integer = ParamRef.Count - 1
+          e.Parameters(ParamRef(y)) = ParamVal(y, x)
+        Next
+        e.Parameters("[x]") = x
+        Prod *= e.Evaluate()
+      Next
+    Catch Ex As Exception
+      'Possibility of IndexOutOfBoundsException for ParamVal matrix
+      Ex.Message = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n" 
+      MsgBox(Ex.ToString)
+      Return Double.NaN
+    End Try
+    
+
+    Return Prod
+  End Function
+
+
+  '''Sum (Summation, Sommatoria)
+  '''Use Like This: 
+'''NOTE: ParamVal MUST HAVE (N, Delta) DIMENSION, where N is number of parameters, Delta is ((Start - End) + 1) otherwise this will crash!!!! 
+'''Summation("2 * [a] + 3 * [b] + [x]", 0, 2, {"a", "b"}.ToList, Matrix)
+  '''x is the main argument (ie: Sum that goes from 0 to 2)
+  '''This Will produce:
+  '''2 * 2 + 3 * 3 + 0 (For x = Start) + 2 * 2 + 3 * 3 + 1 (For x = 1) + 2 * 2 + 3 * 3 + 2 (For x = End) = 42
+  
+  Public Function Summation(Byval Expr, Byval Start as Integer, Byval End As Integer, Byval ParamRef As List(Of String), ParamArray ParamVal As Double(,)) As Double
+    
+    'Initilization
+    
+    Dim Sum As Double 'automatically initialized to 0
+    Dim e As New Expression(Expr)
+    
+    'Parameter calculation
+
+    
+    'Sum Calculation
+    Try
+      For x As Integer = Start to End
+        For y As Integer = ParamRef.Count - 1
+          e.Parameters(ParamRef(y)) = ParamVal(y, x)
+        Next
+        e.Parameters("[x]") = x
+        Sum += e.Evaluate()
+      Next
+    Catch Ex As Exception
+      'Possibility of IndexOutOfBoundsException for ParamVal matrix
+      Ex.Message = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n" 
+      MsgBox(Ex.ToString)
+      Return Double.NaN
+    End Try
+    
+
+    Return Sum
+  End Function
+End Namespace
