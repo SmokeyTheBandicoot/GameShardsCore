@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -13,7 +13,7 @@
     <AssemblyName>GameShardsCoreBETA</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,6 +28,7 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
     <Optimize>true</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,6 +40,7 @@
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -59,6 +61,11 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NCalc">
+      <HintPath>..\..\..\..\Desktop\Gameshards\Librerie\NCalc\NCalc.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -85,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountManager.vb" />
+    <Compile Include="AdvancedMath.vb" />
     <Compile Include="ArrayExt.vb" />
     <Compile Include="Base.vb" />
     <Compile Include="Charset.vb" />
@@ -93,13 +101,21 @@
     <Compile Include="Crasher.vb" />
     <Compile Include="DateManager.vb" />
     <Compile Include="DebugChecker.vb" />
+    <Compile Include="Documentation.Designer.vb">
+      <DependentUpon>Documentation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Encryptor.vb" />
     <Compile Include="GCMath.vb" />
     <Compile Include="ExtendedControls.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GSCoreMethodNotDesignedForCurrentObjectException.vb" />
-    <Compile Include="IncompatibleArgumentsException.vb" />
+    <Compile Include="GSCoreIncorrectSyntaxException.vb" />
+    <Compile Include="GSRegEx.vb" />
+    <Compile Include="GSCoreIncompatibleArgumentsException.vb" />
     <Compile Include="IOExtended.vb" />
     <Compile Include="MathVector2D.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -118,9 +134,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Rectangle.vb" />
+    <Compile Include="StringManagerExtended.vb" />
     <Compile Include="Vector2D.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Documentation.resx">
+      <DependentUpon>Documentation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -142,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="[Documentation].txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,12 +10,12 @@ Imports System.Runtime.InteropServices
 
 ' Controllare i valori degli attributi dell'assembly
 
-<Assembly: AssemblyTitle("GameShardsCoreBETA-FrameWork4.0")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("GameShads")> 
-<Assembly: AssemblyProduct("GameShardsCoreBETA")> 
-<Assembly: AssemblyCopyright("Copyright ©  2013/2016")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("GameShardsCore")>
+<Assembly: AssemblyDescription("BETA")>
+<Assembly: AssemblyCompany("GameShads")>
+<Assembly: AssemblyProduct("GameShardsCore")>
+<Assembly: AssemblyCopyright("Copyright ©  2013/2016")>
+<Assembly: AssemblyTrademark("NO LICENSE YET")>
 
 <Assembly: ComVisible(True)> 
 

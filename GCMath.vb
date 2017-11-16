@@ -17,6 +17,6 @@ Public Class GCMathExtended
     End Function
 
     Public Function NthRoot(ByVal number As Double, ByVal RootIndex As Integer) As Double
-        Return number * (1 / RootIndex)
+        Return number ^ (1 / RootIndex)
     End Function
 End Class

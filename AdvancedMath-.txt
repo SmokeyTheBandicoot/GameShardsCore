@@ -1,9 +1,9 @@
-﻿Option Strict On
+Option Strict On
 
+Imports System.Math
 Imports NCalc
 
 Namespace AdvancedMath
-
     Public Class SumProd
         '''Sum (Summation, Sommatoria)
         '''Use Like This:  
@@ -12,7 +12,7 @@ Namespace AdvancedMath
         '''This Will produce:
         '''2 * 2 + 3 * 3 + 0 (For x = Start) + 2 * 2 + 3 * 3 + 1 (For x = 1) + 2 * 2 + 3 * 3 + 2 (For x = End) = 42
 
-        Public Shared Function SimpleSummation(ByVal Expr As String, ByVal Start As Integer, ByVal End_ As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As List(Of Double)) As Double
+        Public Shared Function SimpleSummation(ByVal Expr, ByVal Start As Integer, ByVal End As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As List(Of Double)) As Double
 
             'Initilization
 
@@ -20,14 +20,14 @@ Namespace AdvancedMath
             Dim e As New Expression(Expr)
 
             'Parameter calculation
-            For y As Integer = 0 To ParamRef.Count - 1
-                e.Parameters(ParamRef(y)) = ParamVal(y)
+            For y As Integer = ParamRef.Count - 1
+        e.Parameters(ParamRef(y)) = ParamVal(y)
             Next
 
             'Sum Calculation
-            For x As Integer = Start To End_
-                e.Parameters("[x]") = x
-                Sum += CDbl(e.Evaluate())
+            For x As Integer = Start To End
+      e.Parameters("[x]") = x
+                Sum += e.Evaluate()
             Next
 
             Return Sum
@@ -39,7 +39,7 @@ Namespace AdvancedMath
         '''x is the main argument (ie: Prod that goes from 0 to 2)
         '''This Will produce:
         '''(2 * 2 + 3 * 3 + 0) (For x = Start) * (2 * 2 + 3 * 3 + 1) (For x = 1) * (2 * 2 + 3 * 3 + 2) (For x = End) = 2730
-        Public Shared Function SimpleMultiplication(ByVal Expr As String, ByVal Start As Integer, ByVal End_ As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As List(Of Double)) As Double
+        Public Shared Function SimpleMultiplication(ByVal Expr, ByVal Start As Integer, ByVal End As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As List(Of Double)) As Double
 
             'Initilization
 
@@ -47,14 +47,14 @@ Namespace AdvancedMath
             Dim e As New Expression(Expr)
 
             'Parameter calculation
-            For y As Integer = 0 To ParamRef.Count - 1
-                e.Parameters(ParamRef(y)) = ParamVal(y)
+            For y As Integer = ParamRef.Count - 1
+      e.Parameters(ParamRef(y)) = ParamVal(y)
             Next
 
             'Prod Calculation
-            For x As Integer = Start To End_
+            For x As Integer = Start To End2730
                 e.Parameters("[x]") = x
-                Prod *= CDbl(e.Evaluate())
+                Prod *= e.Evaluate()
             Next
 
             Return Prod
@@ -68,7 +68,7 @@ Namespace AdvancedMath
         '''This Will produce:
         '''(2 * 2 + 3 * 3 + 0) (For x = Start) * (2 * 2 + 3 * 3 + 1) (For x = 1) * (2 * 2 + 3 * 3 + 2) (For x = End) = 2730
 
-        Public Shared Function Multiplication(ByVal Expr As String, ByVal Start As Integer, ByVal End_ As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As Double(,)) As Double
+        Public Function Multiplication(ByVal Expr, ByVal Start As Integer, ByVal End As Integer, ByVal ParamRef As List(Of String), ParamArray ParamVal As Double(,)) As Double
 
             'Initilization
 
@@ -80,17 +80,17 @@ Namespace AdvancedMath
 
             'Sum Calculation
             Try
-                For x As Integer = Start To End_
-                    For y As Integer = 0 To ParamRef.Count - 1
-                        e.Parameters(ParamRef(y)) = ParamVal(y, x)
+                For x As Integer = Start To End
+        For y As Integer = ParamRef.Count - 1
+          e.Parameters(ParamRef(y)) = ParamVal(y, x)
                     Next
                     e.Parameters("[x]") = x
-                    Prod *= CDbl(e.Evaluate())
+                    Prod *= e.Evaluate()
                 Next
             Catch Ex As Exception
                 'Possibility of IndexOutOfBoundsException for ParamVal matrix
-                Dim mess As String = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n"
-                MsgBox(Ex.ToString + mess)
+                Ex.Message = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n"
+                MsgBox(Ex.ToString)
                 Return Double.NaN
             End Try
 
@@ -107,7 +107,7 @@ Namespace AdvancedMath
         '''This Will produce:
         '''2 * 2 + 3 * 3 + 0 (For x = Start) + 2 * 2 + 3 * 3 + 1 (For x = 1) + 2 * 2 + 3 * 3 + 2 (For x = End) = 42
 
-        Public Shared Function Summation(ByVal Expr As String, ByVal Start As Integer, ByVal End_ As Integer, ByVal ParamRef As List(Of String), ByVal ParamVal As Double(,)) As Double
+        Public Function Summation(ByVal Expr, ByVal Start As Integer, ByVal End As Integer, ByVal ParamRef As List(Of String), ParamArray ParamVal As Double(,)) As Double
 
             'Initilization
 
@@ -119,17 +119,17 @@ Namespace AdvancedMath
 
             'Sum Calculation
             Try
-                For x As Integer = Start To End_
-                    For y As Integer = 0 To ParamRef.Count - 1
-                        e.Parameters(ParamRef(y)) = ParamVal(y, x)
+                For x As Integer = Start To End
+        For y As Integer = ParamRef.Count - 1
+          e.Parameters(ParamRef(y)) = ParamVal(y, x)
                     Next
                     e.Parameters("[x]") = x
-                    Sum += CDbl(e.Evaluate())
+                    Sum += e.Evaluate()
                 Next
             Catch Ex As Exception
                 'Possibility of IndexOutOfBoundsException for ParamVal matrix
-                Dim mess As String = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n"
-                MsgBox(Ex.ToString + mess)
+                Ex.Message = "/nProbably this error is due to incorrect dimension of ParamVal Parameter, which is a 2D matrix, whose dimensions must be (N, Delta), where N is the number of parameters (which should be equal to ParamRef.Count - 1 and Delta is equal to [Math.Abs(Start - End) + 1]./n"
+                MsgBox(Ex.ToString)
                 Return Double.NaN
             End Try
 
@@ -138,4 +138,3 @@ Namespace AdvancedMath
         End Function
     End Class
 End Namespace
-

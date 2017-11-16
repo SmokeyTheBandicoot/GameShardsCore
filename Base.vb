@@ -5,7 +5,7 @@ Imports System.Math
 
 Namespace Base
     Public Class ColorManager
-        Public Function GetComplementaryColor(ByVal color As Color, Optional ByVal ConsiderTransparency As Boolean = False) As Color
+        Public Shared Function GetComplementaryColor(ByVal color As Color, Optional ByVal ConsiderTransparency As Boolean = False) As Color
             If ConsiderTransparency Then
                 Return Color.FromArgb(255 - color.R, 255 - color.G, 255 - color.B, 255 - color.A)
             End If
@@ -15,26 +15,26 @@ Namespace Base
 
     Namespace Geometry
         Public Class Geometry
-            Public Function GetDistanceFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As ULong
+            Public Shared Function GetDistanceFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As ULong
                 Return CULng(System.Math.Sqrt((point1.X - point2.X) ^ 2 + (point1.Y - point2.Y) ^ 2))
             End Function
 
-            Public Function GetAngularCoefficientFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As Single
+            Public Shared Function GetAngularCoefficientFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As Single
                 Return CSng(((point1.Y - point2.Y) / (point1.X - point2.X)))
             End Function
 
-            Public Function GetAngleFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As Single
+            Public Shared Function GetAngleFrom2Points(ByVal point1 As Point, ByVal point2 As Point) As Single
                 Return CSng(Atan((point1.Y - point2.Y) / (point1.X / point2.X)))
             End Function
 
-            Public Function GetCenterOfRectangle(ByVal rect As Rectangle) As Point
+            Public Shared Function GetCenterOfRectangle(ByVal rect As Rectangle) As Point
                 Dim p As New Point
                 p.X = CInt(rect.Left + rect.Width / 2)
                 p.Y = CInt(rect.Top + rect.Height / 2)
                 Return p
             End Function
 
-            Public Function GetRectangleFromCenterAndSize(ByVal center As Point, ByVal size As Size) As Rectangle
+            Public Shared Function GetRectangleFromCenterAndSize(ByVal center As Point, ByVal size As Size) As Rectangle
                 Dim r As New Rectangle
                 r.Location = New Point(CInt(center.X - size.Width / 2), CInt(center.Y - size.Height / 2))
                 r.Size = size
@@ -58,7 +58,7 @@ Namespace Base
 
     Namespace Math
         Public Class MiscMath
-            Public Function GenRandomInt(inMin As Int32, inMax As Int32) As Int32
+            Public Shared Function GenRandomInt(inMin As Int32, inMax As Int32) As Int32
                 Static staticRandomGenerator As New Random
                 If inMin > inMax Then Dim t = inMin : inMin = inMax : inMax = t
                 If inMax < Int32.MaxValue Then Return staticRandomGenerator.Next(inMin, inMax + 1)
@@ -80,7 +80,7 @@ Namespace Base
             ''' <param name="stepnum"></param>
             ''' <returns></returns>
             ''' <remarks></remarks>
-            Public Function Advicinate(ByVal curvalue As Integer, ByVal goalvalue As Integer, ByVal stepnum As Integer, Optional ByVal random As Boolean = False) As Integer
+            Public Shared Function Advicinate(ByVal curvalue As Integer, ByVal goalvalue As Integer, ByVal stepnum As Integer, Optional ByVal random As Boolean = False) As Integer
                 If curvalue = goalvalue Then
                     Return curvalue
                 Else
@@ -119,7 +119,7 @@ Namespace Base
         End Class
 
         Public Class Operators
-            Public Function Factorial(ByVal number As Integer) As BigInteger
+            Public Shared Function Factorial(ByVal number As Integer) As BigInteger
                 If number <= 1 Then
                     Return 0
                 Else
@@ -128,7 +128,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Gives the number 0 if the value is negative, returns the value itself if the value is positive
+            ''' DEPRECIATED Gives the number 0 if the value is negative, returns the value itself if the value is positive
             ''' </summary>
             ''' <param name="value"></param>
             ''' <returns></returns>
@@ -142,7 +142,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Gives the number 0 if the value is negative, returns the value itself if the value is positive. Forces operation on a double
+            ''' DEPRECIATED Gives the number 0 if the value is negative, returns the value itself if the value is positive. Forces operation on a double
             ''' </summary>
             ''' <param name="value"></param>
             ''' <returns></returns>
@@ -156,7 +156,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Gives the number 0 if the value is positive, returns the value itself if the value is negative.
+            ''' DEPRECIATED Gives the number 0 if the value is positive, returns the value itself if the value is negative.
             ''' </summary>
             ''' <param name="value"></param>
             ''' <returns></returns>
@@ -170,7 +170,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Gives the number 0 if the value is positive, returns the value itself if the value is negative. Forces operation on a double
+            ''' DEPRECIATED Gives the number 0 if the value is positive, returns the value itself if the value is negative. Forces operation on a double
             ''' </summary>
             ''' <param name="value"></param>
             ''' <returns></returns>
@@ -184,7 +184,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' If the number is greater than max, return max, otherwise returns the value
+            ''' DEPRECIATED If the number is greater than max, return max, otherwise returns the value
             ''' </summary>
             ''' <param name="value"></param>
             ''' <param name="Max"></param>
@@ -199,7 +199,7 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' If the number is greater than max, return max, otherwise returns the value
+            ''' DEPRECIATED If the number is greater than max, return max, otherwise returns the value
             ''' </summary>
             ''' <param name="value"></param>
             ''' <param name="Max"></param>
@@ -214,14 +214,14 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Returns value is Min Less then Value Less than Max. Return min is value is less than min, return Max is value is greater than Max
+            '''Returns value is Min Less then Value Less than Max. Return min is value is less than min, return Max is value is greater than Max
             ''' </summary>
             ''' <param name="value"></param>
             ''' <param name="Max"></param>
             ''' <param name="Min"></param>
             ''' <returns></returns>
             ''' <remarks></remarks>
-            Public Function ValueContained(ByVal value As Integer, ByVal Max As Integer, ByVal Min As Integer, Optional ByRef IsContained As Boolean = True) As Integer
+            Public Shared Function ValueContained(ByVal value As Integer, ByVal Max As Integer, ByVal Min As Integer, Optional ByRef IsContained As Boolean = True) As Integer
                 If Min > Max Then
                     Throw New GSCoreIncompatibleArgumentsException("Max value must be Greater than Min value")
                     Return Nothing
@@ -239,16 +239,17 @@ Namespace Base
             End Function
 
             ''' <summary>
-            ''' Returns value is Min Less then Value Less than Max. Return min is value is less than min, return Max is value is greater than Max
+            ''' DEPRECIATED Returns value is Min Less then Value Less than Max. Return min is value is less than min, return Max is value is greater than Max
             ''' </summary>
             ''' <param name="value"></param>
             ''' <param name="Max"></param>
             ''' <param name="Min"></param>
             ''' <returns></returns>
             ''' <remarks></remarks>
-            Public Function ValueContained(ByVal value As Double, ByVal Max As Double, ByVal Min As Double, Optional ByRef IsContained As Boolean = True) As Double
+            Public Shared Function ValueContained(ByVal value As Double, ByVal Max As Double, ByVal Min As Double, Optional ByRef IsContained As Boolean = True) As Double
                 If Min > Max Then
                     Throw New GSCoreIncompatibleArgumentsException("Max value must be Greater than Min value")
+                    IsContained = Nothing
                     Return Nothing
                 End If
 
@@ -262,11 +263,48 @@ Namespace Base
                     Return value
                 End If
             End Function
+
+            ''' <summary>
+            ''' If ForceContainment = True Returns: min, if value is less than min; max, if value is greater than max, value if value is contained between min and max. If ForceContainment = False, then it will always return value, but it will check if value is between min and max
+            ''' </summary>
+            ''' <param name="Value"></param>
+            ''' <param name="Min"></param>
+            ''' <param name="Max"></param>
+            ''' <param name="ForceContainment"></param>
+            ''' <param name="WasContained"></param>
+            ''' <returns></returns>
+            Public Shared Function ValueContained(ByVal Value As Double, Min As Double, Max As Double, Optional ByVal ForceContainment As Boolean = True, Optional ByRef WasContained As Boolean = True) As Double
+                If Min > Max Then
+                    Throw New GSCoreIncompatibleArgumentsException("Max value must be Greater than Min value")
+                    WasContained = Nothing
+                    Return Nothing
+                End If
+
+                If Value < Min Then
+                    WasContained = False
+                    If ForceContainment Then
+                        Return Min
+                    End If
+                    Return Value
+
+                ElseIf Value > Max Then
+                    WasContained = False
+                    If ForceContainment Then
+                        Return Max
+                    End If
+                    Return Value
+
+                Else
+                    WasContained = True
+                    Return Value
+                End If
+
+            End Function
         End Class
 
         Public Class BaseConverter
             'Converts a number in base  to a number in base N. Returns Nothing if the conversion failed. Returns 0 if number is 0 or Nothing
-            Public Function ConvertBaseNToTen(ByVal number As String, base As Byte) As String
+            Public Shared Function ConvertBaseNToTen(ByVal number As String, base As Byte) As String
                 If (Not CDbl(number) = 0) And (Not number = Nothing) Then
                     Dim chars As New List(Of Char)
                     Dim nums As New List(Of Byte)
@@ -310,7 +348,7 @@ Namespace Base
             ''' <returns></returns>
             ''' Returns a number that from base 10 is converted to another number (returned as string) converted into another base. Can use multiple customization options
             ''' <remarks></remarks>
-            Public Function ConvertBaseTenToN(ByVal number As Double, ByVal Base As Byte, Optional ByVal Alphabet() As Char = Nothing, Optional ByVal AlphabetType As String = "Hex", Optional ByVal MinDigits As Integer = -1) As String
+            Public Shared Function ConvertBaseTenToN(ByVal number As Double, ByVal Base As Byte, Optional ByVal Alphabet() As Char = Nothing, Optional ByVal AlphabetType As String = "Hex", Optional ByVal MinDigits As Integer = -1) As String
                 'Sets the alphabet (presets)
                 If Alphabet Is Nothing Then
                     If AlphabetType.ToUpper = "HEX" Then
@@ -380,7 +418,7 @@ Namespace Base
             ''' <returns></returns>
             ''' Returns a number that from base 10 is converted to another number (returned as string) converted into another base. Can use multiple customization options
             ''' <remarks></remarks>
-            Public Function ConvertBaseTenToN(ByVal number As ULong, ByVal Base As ULong, Optional ByVal Alphabet() As Char = Nothing, Optional ByVal AlphabetType As String = "Hex", Optional ByVal MinDigits As Integer = -1) As String
+            Public Shared Function ConvertBaseTenToN(ByVal number As ULong, ByVal Base As ULong, Optional ByVal Alphabet() As Char = Nothing, Optional ByVal AlphabetType As String = "Hex", Optional ByVal MinDigits As Integer = -1) As String
                 'Sets the alphabet (presets)
                 If Alphabet Is Nothing Then
                     If AlphabetType.ToUpper = "HEX" Then
